@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<title>BBCh - Certificate Disbursal System</title>
+		<link rel="stylesheet" href="bootstrap.min.css">
+		<script src="bootstrap.min.js"></script>
+		<script src="jquery-3.5.1.min.js"></script>
+	</head>
+	<body>
+		<div class="row">
+		  <div class="col-xs-12" style="margin-left: 20px">
+		  	<h2>BBCh Certificate Disbursement</h2>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-xs-12">
+		    <form method="post" action="">
+		      <div class="row">
+		        <div class="col-xs-5 form-group" style="margin-left: 20px">
+		          Certificate Name:
+		          <select
+		            type="text"
+		            id="certificateType"
+		            class="form-control"
+		            name="certificateType"
+		            onchange="changeCertificateType()"
+		          >
+		          </select>
+		        </div>
+		      </div>
+		      <div class="row">
+		        <div class="col-sm-2 form-group" style="margin-left: 20px">
+		          Template:
+		          <img
+		            src=""
+		            id="templateImage"
+		            name="templateImage"
+		          >
+		        </div>
+		      </div>
+		      <div class="row">
+				<div class="col-sm-5 form-group" style="margin-left: 20px">
+					<a href="" id="sampleDownload">Download Data Excel Template File</a>
+				</div>
+			  </div>
+		      <div class="row">
+				<div class="col-sm-5 form-group" style="margin-left: 20px">
+				  Select Data Excel File:
+				  <input
+				  	type="file"
+					id="dataFile"
+					class="form-control"
+					name="dataFile"
+				  >
+				</div>
+		      </div>
+		      <div class="row">
+		        <div class="col-xs-12" style="margin-left: 20px;margin-top: 30px">
+		          <button
+		            class="btn btn-primary"
+		            type="submit">Submit</button>
+		          <button
+		            class="btn btn-danger"
+		            type="button" onclick="changeCertificateType()">Reset</button>
+		        </div>
+		      </div>
+		    </form>
+		  </div>
+		</div>
+		<script language="Javascript">
+			var certificateTypeData;
+			$.get("http://localhost/getAllCertificateTypes", function(data, status){
+			    certificateTypeData = data.certificateTypes;
+			    var selectBox = document.getElementById('certificateType');
+					for(var i=0; i<certificateTypeData.length; i++) {
+						var el = certificateTypeData[i];
+						var option = document.createElement("option");
+						option.text = el.description;
+						option.value = el.name;
+						selectBox.add(option);
+  				}
+  				changeCertificateType();
+  			});
+
+  			function changeCertificateType() {
+  				var selectBox = document.getElementById('certificateType');
+  				var selectedName = selectBox.value;
+				var el;
+				for(var i=0; i<certificateTypeData.length; i++) {
+					el = certificateTypeData[i];
+					if(el.name == selectedName) {
+						break;
+					}
+				}
+				document.getElementById('templateImage').src = el.imageURL;
+				document.getElementById('sampleDownload').href = 'http://103.127.146.137/bbch/templates/' + el.name + '.xlsx';
+  			}
+		</script>
+	</body>
+</html>

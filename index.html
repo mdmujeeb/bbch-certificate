@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">
 		  <div class="col-xs-12">
-		    <form method="post" action="http://localhost/generate" enctype="multipart/form-data">
+		    <form method="post" action="http://103.127.146.137/certificate/generate" enctype="multipart/form-data">
 		      <div class="row">
 		        <div class="col-xs-5 form-group" style="margin-left: 20px">
 		          Certificate Name:
@@ -69,7 +69,7 @@
 		</div>
 		<script language="Javascript">
 			var certificateTypeData;
-			$.get("http://localhost/getAllCertificateTypes", function(data, status){
+			$.get("http://103.127.146.137/certificate/getAllCertificateTypes", function(data, status){
 			    certificateTypeData = data.certificateTypes;
 			    var selectBox = document.getElementById('certificateType');
 					for(var i=0; i<certificateTypeData.length; i++) {

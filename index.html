@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">
 		  <div class="col-xs-12">
-		    <form method="post" action="">
+		    <form method="post" action="http://localhost/generate" enctype="multipart/form-data">
 		      <div class="row">
 		        <div class="col-xs-5 form-group" style="margin-left: 20px">
 		          Certificate Name:
@@ -57,10 +57,11 @@
 		        <div class="col-xs-12" style="margin-left: 20px;margin-top: 30px">
 		          <button
 		            class="btn btn-primary"
-		            type="submit">Submit</button>
+		            type="button"
+		            onclick="submitData()">Submit</button>
 		          <button
 		            class="btn btn-danger"
-		            type="button" onclick="changeCertificateType()">Reset</button>
+		            type="button">Reset</button>
 		        </div>
 		      </div>
 		    </form>
@@ -93,6 +94,10 @@
 				}
 				document.getElementById('templateImage').src = el.imageURL;
 				document.getElementById('sampleDownload').href = 'http://103.127.146.137/bbch/templates/' + el.name + '.xlsx';
+  			}
+
+  			function submitData() {
+  				document.forms[0].submit();
   			}
 		</script>
 	</body>
